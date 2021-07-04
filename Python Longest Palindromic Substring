@@ -1,0 +1,33 @@
+class Solution(object):
+    ss=""
+    def isPalindrome(self, start, length):
+        mid = length / 2
+        if length % 2 != 0:
+            mid = mid + 1
+        k = start
+        l = start+length-1
+
+        while k < start + mid:
+            if self.ss[k] != self.ss[l]:
+                return False
+            k = k + 1
+            l = l - 1
+        return True
+
+    def collectCombinations(self, currentLength, overallLength):
+        if currentLength == 0:
+            return [-1,-1]
+        x= 0
+        while x + currentLength <= overallLength:
+            if self.isPalindrome(x, currentLength):
+                return [x , x + currentLength]
+            x = x + 1
+        return self.collectCombinations(currentLength - 1, overallLength)
+
+    def longestPalindrome(self, s):        
+        length = len(s)
+        self.ss = s
+        [start, stop] = self.collectCombinations(length, length)
+        return self.ss[start : stop] if start != -1 else ""
+
+    
