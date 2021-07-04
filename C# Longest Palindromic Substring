@@ -1,0 +1,30 @@
+public class Solution {
+  public bool isPalindrome(String posResult,int start,int length){
+      int mid = length/2;
+      if (length % 2 != 0) 
+          mid++;
+     
+      for(int k = start,l = start+ length-1;k < start + mid;k++,l--){
+              if(posResult[k] != posResult[l]){
+                  return false;
+              }
+      } 
+      return true;
+  }
+  public String collectCombinations(String s, int currentLength, int overallLength) {		
+	  if(currentLength == 0)
+		  return "";
+	  for(int i = 0; i+currentLength<= overallLength; i++ )
+	  {
+		  if(isPalindrome(s,i,currentLength)) {
+			  return s.Substring(i,currentLength);
+		  }			  
+	  }
+	  return collectCombinations(s,currentLength-1,overallLength);
+  }
+
+  public String LongestPalindrome(String s) {
+	 int length = s.Length;
+	 return collectCombinations(s,length, length); 
+  } 
+}
