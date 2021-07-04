@@ -1,0 +1,32 @@
+class Solution {
+public:
+      bool isPalindrome(const std::string& posResult,int start,int length){
+      int mid = length/2;
+      if (length % 2 != 0) 
+          mid++;
+     
+      for(int k = start,l = start+ length-1;k < start + mid;k++,l--){
+              if(posResult[k] != posResult[l]){
+                  return false;
+              }
+      } 
+      return true;
+  }
+   std::string collectCombinations(const std::string& s,int currentLength, int overallLength) {		
+	  if(currentLength == 0)
+		  return "";
+	  for(int i = 0; i+currentLength<= overallLength; i++ )
+	  {
+		  if(isPalindrome(s,i,currentLength)) {
+			  return s.substr(i,currentLength);
+		  }			  
+	  }
+	  return collectCombinations(s,currentLength-1,overallLength);
+  }
+    std::string longestPalindrome(const std::string& s) {
+        int start = 0;
+	 int length = s.length();
+	 return collectCombinations(s,length, length); 
+    }
+};
+
